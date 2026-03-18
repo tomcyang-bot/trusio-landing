@@ -229,19 +229,39 @@ footer{background:#060e1a;padding:48px 56px;}
 .revealed{opacity:1;transform:none;}
 
 @media(max-width:900px){
-  nav{padding:0 20px;}
+  nav{padding:0 20px;gap:16px;}
+  .nav-links{display:none;}
   .hero{padding:100px 20px 60px;}
-  .feat-strip{padding:48px 20px;}
-  .feat-strip-grid{grid-template-columns:repeat(2,1fr);}
-  .section{padding:64px 20px;}
-  .pricing-inner{padding:64px 20px;}
-  .steps-row{flex-direction:column;gap:32px;}
+  h1{font-size:36px;}
+  .hero-sub{font-size:15px;}
+  .btn-green-lg,.btn-outline-lg{padding:13px 24px;font-size:14px;}
+  .hero-btns{flex-direction:column;align-items:stretch;}
+  .hero-note{font-size:11px;}
+  .feat-strip{padding:40px 20px;}
+  .feat-strip-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px;}
+  .feat-card{padding:24px 16px;}
+  .feat-icon{width:48px;height:48px;font-size:22px;}
+  .feat-card h3{font-size:13px;}
+  .section{padding:56px 20px;}
+  h2{font-size:28px;}
+  .sub{font-size:15px;}
+  .steps-row{flex-direction:column;gap:24px;margin-top:40px;}
   .step-connector{display:none;}
-  .benefits-grid{grid-template-columns:1fr;}
+  .step{padding:0;text-align:left;display:flex;align-items:flex-start;gap:16px;}
+  .step-circle{width:48px;height:48px;font-size:18px;margin:0;flex-shrink:0;}
+  .step h4{font-size:14px;margin-bottom:4px;}
+  .step p{font-size:12px;}
+  .benefits-grid{grid-template-columns:1fr!important;gap:40px;}
+  .benefits-visual{display:none;}
+  .pricing-inner{padding:56px 20px;}
   .price-grid,.testi-grid{grid-template-columns:1fr;}
+  .price-card.featured{order:-1;}
+  .risk-grid{grid-template-columns:1fr!important;}
+  .risk-section{padding:56px 20px!important;}
+  .cta-section{padding:64px 20px;}
+  .cta-section h2{font-size:28px;}
   .footer-row{flex-direction:column;gap:20px;text-align:center;}
   .footer-links{flex-wrap:wrap;justify-content:center;}
-  .cta-section{padding:64px 20px;}
   footer{padding:40px 20px;}
 }
 </style>
@@ -307,14 +327,14 @@ footer{background:#060e1a;padding:48px 56px;}
 </div>
 
 <!-- RISK MANAGEMENT SECTION -->
-<div style="background:#fff;padding:96px 56px;">
+<div class="risk-section" style="background:#fff;padding:96px 56px;">
   <div style="max-width:1100px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:56px;">
       <div class="tag">Complete Protection</div>
       <h2>From onboarding to <span>full risk coverage.</span></h2>
       <p class="sub sub-center">CreditCheck guides you through every layer of B2B credit protection — not just the application.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;">
+    <div class="risk-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;">
       <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;">
         <div style="width:48px;height:48px;border-radius:12px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📋</div>
         <div>
@@ -345,6 +365,55 @@ footer{background:#060e1a;padding:48px 56px;}
           <h4 style="font-size:16px;font-weight:800;margin-bottom:6px;">Invoice Finance</h4>
           <p style="font-size:13px;color:#64748b;line-height:1.8;">Turn your approved invoices into immediate cash flow. Connect with invoice finance providers to fund your growth without waiting 30-90 days.</p>
           <span style="display:inline-block;margin-top:10px;font-size:11px;font-weight:700;color:#7c3aed;background:#fdf4ff;padding:3px 10px;border-radius:100px;">Enterprise</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO IT'S FOR -->
+<div style="background:#f8fafc;padding:96px 56px;" class="risk-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="tag">Who it's for</div>
+      <h2>Works for <span>any business</span> that extends credit.</h2>
+      <p class="sub sub-center">Whether your customer is a company or an individual homeowner — CreditCheck handles both.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;" class="risk-grid">
+      <!-- B2B -->
+      <div style="background:#fff;border:2px solid #e2e8f0;border-radius:20px;padding:36px;transition:all .2s;">
+        <div style="width:56px;height:56px;border-radius:14px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px;">🏢</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#1d4ed8;margin-bottom:8px;">B2B — BUSINESS CLIENTS</div>
+        <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;">Company credit onboarding</h3>
+        <p style="font-size:13px;color:#64748b;line-height:1.8;margin-bottom:20px;">For suppliers extending credit to other businesses. Verify ABN, check company credit history, collect Personal Guarantee.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
+          {["Building materials & trade supplies","Manufacturing & wholesale","Electrical, plumbing, HVAC","Business services"].map((i,idx) => (
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;">
+            <span style="color:#1d4ed8;font-weight:700;">✓</span> Building materials & trade supplies
+          </div>)}
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;"><span style="color:#1d4ed8;font-weight:700;">✓</span> Building materials & trade supplies</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;"><span style="color:#1d4ed8;font-weight:700;">✓</span> Manufacturing & wholesale distribution</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;"><span style="color:#1d4ed8;font-weight:700;">✓</span> Electrical, plumbing, HVAC supplies</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;"><span style="color:#1d4ed8;font-weight:700;">✓</span> Any B2B supplier with credit terms</div>
+        </div>
+        <div style="background:#f8fafc;border-radius:8px;padding:12px 16px;font-size:12px;color:#64748b;">
+          Uses: <strong>ABN verification · Company credit report · Personal Guarantee</strong>
+        </div>
+      </div>
+      <!-- B2C -->
+      <div style="background:#fff;border:2px solid #e2e8f0;border-radius:20px;padding:36px;transition:all .2s;">
+        <div style="width:56px;height:56px;border-radius:14px;background:#f0fdf4;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:20px;">🏠</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;color:#16a34a;margin-bottom:8px;">B2C — INDIVIDUAL CLIENTS</div>
+        <h3 style="font-size:20px;font-weight:800;margin-bottom:12px;">Consumer credit screening</h3>
+        <p style="font-size:13px;color:#64748b;line-height:1.8;margin-bottom:20px;">For businesses installing or supplying to homeowners on payment plans. Screen individuals before you start work.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;"><span style="color:#16a34a;font-weight:700;">✓</span> Solar panel installation</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;"><span style="color:#16a34a;font-weight:700;">✓</span> Home renovation & building</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;"><span style="color:#16a34a;font-weight:700;">✓</span> Furniture & appliance finance</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#475569;"><span style="color:#16a34a;font-weight:700;">✓</span> Air conditioning & heat pump install</div>
+        </div>
+        <div style="background:#f0fdf4;border-radius:8px;padding:12px 16px;font-size:12px;color:#15803d;">
+          Uses: <strong>Identity check · Personal credit report · Privacy Act consent</strong>
         </div>
       </div>
     </div>
