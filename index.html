@@ -932,11 +932,14 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 #tc-box.open{display:flex;}
 @media(max-width:600px){
   #tc-overlay.open{display:block;}
-  #tc-box{position:fixed;top:0;left:0;right:0;bottom:0;width:100%!important;height:100%!important;max-height:100%;border-radius:0;border:none;z-index:9999;box-sizing:border-box;}
+  #tc-box{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw!important;height:100%!important;max-height:100%;border-radius:0;border:none;z-index:9999;box-sizing:border-box;overflow:hidden;}
   #tc-btn{bottom:16px;right:16px;width:48px;height:48px;font-size:20px;}
-  .tc-msg{max-width:90%;word-break:break-word;}
-  .tc-msgs{padding:12px;}
-  .tc-inp-row{padding:10px;padding-bottom:max(10px,env(safe-area-inset-bottom));}
+  .tc-msg{max-width:88%;word-break:break-word;}
+  .tc-msgs{padding:12px;overflow-y:auto;}
+  .tc-inp-row{padding:8px 10px;padding-bottom:max(8px,env(safe-area-inset-bottom));flex-shrink:0;box-sizing:border-box;align-items:flex-end;}
+  .tc-inp{min-width:0;flex:1;resize:none;max-height:120px;overflow-y:auto;line-height:1.5;padding:8px 11px;}
+  .tc-mic{flex-shrink:0;width:36px;height:36px;align-self:flex-end;}
+  .tc-send{flex-shrink:0;width:36px;height:36px;align-self:flex-end;}
 }
 .tc-hdr{background:var(--navy);padding:14px 16px;display:flex;align-items:center;gap:10px;}
 .tc-hdr-icon{width:32px;height:32px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
@@ -974,11 +977,11 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     <div class="tc-msg bot">Hi! I'm Trusio Assistant 👋 How can I help you today?<br/><br/>你好！我是 Trusio 助手，有什么可以帮你的吗？</div>
   </div>
   <div class="tc-inp-row">
-    <input class="tc-inp" id="tc-inp" placeholder="Ask a question · 输入问题..."
-      onkeydown="if(event.key==='Enter'&&!tcComposing)tcSend()"
+    <textarea class="tc-inp" id="tc-inp" placeholder="Ask a question · 输入问题..." rows="1"
+      onkeydown="if(event.key==='Enter'&&!event.shiftKey&&!tcComposing){event.preventDefault();tcSend();}"
       oncompositionstart="tcComposing=true"
       oncompositionend="tcComposing=false;document.getElementById('tc-send').disabled=!this.value.trim()"
-      oninput="document.getElementById('tc-send').disabled=!this.value.trim()"/>
+      oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px';document.getElementById('tc-send').disabled=!this.value.trim()"></textarea>
     <button class="tc-mic" id="tc-mic" onclick="tcMic()" title="Voice input">🎤</button>
     <button class="tc-send" id="tc-send" onclick="tcSend()" disabled title="Send">↑</button>
   </div>
@@ -1022,7 +1025,7 @@ async function tcSend() {
   const inp = document.getElementById('tc-inp');
   const text = inp.value.trim();
   if (!text || tcLoading) return;
-  inp.value = '';
+  inp.value = ''; inp.style.height = 'auto';
   document.getElementById('tc-send').disabled = true;
   tcAddMsg('user', text);
   tcMsgs.push({role:'user', content:text});
