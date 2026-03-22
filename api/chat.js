@@ -11,7 +11,12 @@ module.exports = async function handler(req, res) {
       },
       body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 800, system, messages })
     });
-    const data = await response.json();
+const data = await response.json();
+    console.log('Status:', response.status);
+    console.log('Data:', JSON.stringify(data).slice(0, 500));
+    if (!response.ok) {
+      return res.status(500).json({ error: data.error?.message || 'API error', data });
+    }
     res.json(data);
   } catch(e) {
     res.status(500).json({ error: e.message });
