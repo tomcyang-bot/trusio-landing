@@ -921,5 +921,172 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
+
+<!-- AI CHAT WIDGET -->
+<style>
+#tc-btn{position:fixed;bottom:24px;right:24px;z-index:9999;width:54px;height:54px;border-radius:50%;background:var(--navy);border:2px solid rgba(34,197,94,.4);cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.3);font-size:22px;color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .15s;}
+#tc-btn:hover{transform:scale(1.08);}
+#tc-box{position:fixed;bottom:90px;right:24px;z-index:9999;width:340px;height:480px;background:#fff;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 8px 40px rgba(0,0,0,.18);display:none;flex-direction:column;overflow:hidden;font-family:'Plus Jakarta Sans',sans-serif;}
+#tc-box.open{display:flex;}
+@media(max-width:480px){
+  #tc-box{right:12px;left:12px;width:auto;bottom:84px;height:420px;}
+  #tc-btn{bottom:16px;right:16px;width:48px;height:48px;font-size:20px;}
+}
+.tc-hdr{background:var(--navy);padding:14px 16px;display:flex;align-items:center;gap:10px;}
+.tc-hdr-icon{width:32px;height:32px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.tc-hdr-name{font-size:13px;font-weight:700;color:#fff;}
+.tc-hdr-sub{font-size:10px;color:rgba(255,255,255,.5);}
+.tc-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:20px;cursor:pointer;margin-left:auto;line-height:1;padding:0;}
+.tc-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.tc-msg{max-width:84%;padding:9px 12px;border-radius:12px;font-size:12px;line-height:1.7;white-space:pre-wrap;}
+.tc-msg.bot{background:#f1f5f9;color:#1e293b;border-radius:12px 12px 12px 2px;align-self:flex-start;}
+.tc-msg.user{background:var(--navy);color:#fff;border-radius:12px 12px 2px 12px;align-self:flex-end;}
+.tc-thinking{font-size:12px;color:#94a3b8;padding:9px 14px;background:#f1f5f9;border-radius:12px 12px 12px 2px;align-self:flex-start;animation:tc-pulse 1s infinite;}
+@keyframes tc-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.tc-inp-row{padding:10px 12px;border-top:1px solid #f1f5f9;display:flex;gap:6px;align-items:center;}
+.tc-inp{flex:1;border:1.5px solid #e2e8f0;border-radius:9px;padding:8px 11px;font-size:12px;outline:none;font-family:inherit;}
+.tc-inp:focus{border-color:var(--green);}
+.tc-mic{width:34px;height:34px;border-radius:8px;border:1.5px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tc-mic.on{border-color:#dc2626;background:#fef2f2;}
+.tc-send{width:34px;height:34px;border-radius:8px;border:none;background:var(--navy);color:#fff;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
+.tc-send:hover{background:#1d4ed8;}
+.tc-send:disabled{background:#e2e8f0;cursor:not-allowed;}
+</style>
+
+<button id="tc-btn" onclick="tcToggle()" aria-label="Chat with Trusio Assistant">💬</button>
+<div id="tc-box" role="dialog" aria-label="Trusio AI Assistant">
+  <div class="tc-hdr">
+    <div class="tc-hdr-icon">⬡</div>
+    <div>
+      <div class="tc-hdr-name">Trusio Assistant</div>
+      <div class="tc-hdr-sub">AI Support · 智能客服</div>
+    </div>
+    <button class="tc-close" onclick="tcToggle()" aria-label="Close">×</button>
+  </div>
+  <div class="tc-msgs" id="tc-msgs">
+    <div class="tc-msg bot">Hi! I'm Trusio Assistant 👋 How can I help you today?<br/><br/>你好！我是 Trusio 助手，有什么可以帮你的吗？</div>
+  </div>
+  <div class="tc-inp-row">
+    <input class="tc-inp" id="tc-inp" placeholder="Ask a question · 输入问题..."
+      onkeydown="if(event.key==='Enter'&&!tcComposing)tcSend()"
+      oncompositionstart="tcComposing=true"
+      oncompositionend="tcComposing=false;document.getElementById('tc-send').disabled=!this.value.trim()"
+      oninput="document.getElementById('tc-send').disabled=!this.value.trim()"/>
+    <button class="tc-mic" id="tc-mic" onclick="tcMic()" title="Voice input">🎤</button>
+    <button class="tc-send" id="tc-send" onclick="tcSend()" disabled title="Send">↑</button>
+  </div>
+</div>
+
+<script>
+const TC_SYSTEM = `You are Trusio Assistant, the AI support agent for Trusio — an Australian credit and cashflow control platform for B2B suppliers and trade businesses.
+
+You help with:
+1. What Trusio does and how it works — credit onboarding, ABN verification, credit reports, Personal Guarantees, trade references, dashboard
+2. Credit application process — the 6-step flow, what each step means, what action is needed
+3. ABN, ASIC, Personal Guarantee (PG) explanations for Australian businesses
+4. PPSR registration (~$7 at ppsr.gov.au), Trade Credit Insurance (Atradius, QBE), Invoice Finance (Octet, Earlypay)
+5. Pricing and getting started with Trusio
+
+Rules:
+- Friendly, professional, concise — like talking to a knowledgeable colleague
+- Respond in English or Chinese depending on what the user uses
+- For legal or financial advice: "For more details, visit trusio.com.au or contact our team at chen@futureone.au"
+- Never make up information. If unsure, direct to trusio.com.au
+- Keep answers short and practical for Australian trade/construction business owners`;
+
+let tcMsgs = [{role:'assistant',content:"Hi! I'm Trusio Assistant 👋 How can I help you today?\n\n你好！我是 Trusio 助手，有什么可以帮你的吗？"}];
+let tcLoading = false;
+let tcComposing = false;
+let tcRec = null;
+
+function tcToggle() {
+  const box = document.getElementById('tc-box');
+  const btn = document.getElementById('tc-btn');
+  const isOpen = box.classList.toggle('open');
+  btn.textContent = isOpen ? '×' : '💬';
+  if (isOpen) document.getElementById('tc-inp').focus();
+}
+
+async function tcSend() {
+  const inp = document.getElementById('tc-inp');
+  const text = inp.value.trim();
+  if (!text || tcLoading) return;
+  inp.value = '';
+  document.getElementById('tc-send').disabled = true;
+  tcAddMsg('user', text);
+  tcMsgs.push({role:'user', content:text});
+  tcLoading = true;
+  const thinking = document.createElement('div');
+  thinking.className = 'tc-thinking'; thinking.id = 'tc-thinking'; thinking.textContent = 'Thinking...';
+  document.getElementById('tc-msgs').appendChild(thinking);
+  tcScroll();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514', max_tokens:800, system:TC_SYSTEM, messages:tcMsgs})
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || "Sorry, I couldn't process that. Please try again.";
+    tcMsgs.push({role:'assistant', content:reply});
+    document.getElementById('tc-thinking')?.remove();
+    tcAddMsg('bot', reply);
+    tcSpeak(reply);
+  } catch(e) {
+    document.getElementById('tc-thinking')?.remove();
+    tcAddMsg('bot', 'Connection error. Please try again.');
+  }
+  tcLoading = false;
+}
+
+function tcAddMsg(role, text) {
+  const div = document.createElement('div');
+  div.className = 'tc-msg ' + role;
+  div.textContent = text;
+  document.getElementById('tc-msgs').appendChild(div);
+  tcScroll();
+}
+
+function tcScroll() {
+  const m = document.getElementById('tc-msgs');
+  setTimeout(() => m.scrollTop = m.scrollHeight, 50);
+}
+
+async function tcSpeak(text) {
+  try {
+    const plain = text.replace(/[#*`>]/g,'').slice(0,500);
+    const res = await fetch('/api/tts', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({text:plain})});
+    if (!res.ok) throw new Error();
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const audio = new Audio(url);
+    audio.onended = () => URL.revokeObjectURL(url);
+    audio.play();
+  } catch(e) {
+    if (!window.speechSynthesis) return;
+    const plain = text.replace(/[#*`>]/g,'').slice(0,300);
+    const utt = new SpeechSynthesisUtterance(plain);
+    utt.lang = /[\u4e00-\u9fff]/.test(plain) ? 'zh-CN' : 'en-AU';
+    window.speechSynthesis.speak(utt);
+  }
+}
+
+function tcMic() {
+  if (tcRec) { tcRec.stop(); tcRec = null; document.getElementById('tc-mic').className='tc-mic'; return; }
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { alert('Voice input requires Chrome browser.'); return; }
+  tcRec = new SR();
+  tcRec.lang = 'zh-CN';
+  tcRec.onstart = () => document.getElementById('tc-mic').className='tc-mic on';
+  tcRec.onresult = e => {
+    const t = e.results[0][0].transcript;
+    document.getElementById('tc-inp').value = t;
+    document.getElementById('tc-send').disabled = false;
+    tcRec = null; document.getElementById('tc-mic').className='tc-mic';
+  };
+  tcRec.onerror = tcRec.onend = () => { tcRec = null; document.getElementById('tc-mic').className='tc-mic'; };
+  tcRec.start();
+}
+</script>
 </body>
 </html>
