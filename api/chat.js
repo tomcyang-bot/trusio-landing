@@ -1,29 +1,28 @@
-export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).end();
+const https = require('https');
+
+module.exports = async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).end();
   const { messages, system } = req.body;
+  if (!messages) return res.status(400).json({ error: 'No messages' });
   try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
+    const body = JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 800,
+      system,
+      messages
+    });
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "x-api-key": process.env.ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01"
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
       },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 800,
-        system,
-        messages
-      })
+      body
     });
     const data = await response.json();
     res.json(data);
   } catch(e) {
     res.status(500).json({ error: e.message });
   }
-}
-```
-
-然后 Vercel → `simplyproject-landing` → Environment Variables → 加：
-```
-ANTHROPIC_API_KEY = sk-ant-你的key
+};
