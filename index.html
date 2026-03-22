@@ -952,7 +952,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 .tc-thinking{font-size:12px;color:#94a3b8;padding:9px 14px;background:#f1f5f9;border-radius:12px 12px 12px 2px;align-self:flex-start;animation:tc-pulse 1s infinite;}
 @keyframes tc-pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .tc-inp-row{padding:10px 12px;border-top:1px solid #f1f5f9;display:flex;gap:6px;align-items:center;}
-.tc-inp{flex:1;border:1.5px solid #e2e8f0;border-radius:9px;padding:8px 11px;font-size:16px;outline:none;font-family:inherit;resize:none;}
+.tc-inp{flex:1;border:1.5px solid #e2e8f0;border-radius:9px;padding:8px 11px;font-size:13px;line-height:1.5;outline:none;font-family:inherit;resize:none;}
 .tc-inp:focus{border-color:var(--green);}
 .tc-mic{width:34px;height:34px;border-radius:8px;border:1.5px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .tc-mic.on{border-color:#dc2626;background:#fef2f2;}
@@ -1146,7 +1146,8 @@ function tcStopWave() {
 
 function tcMic() {
   if (tcRec) {
-    tcRec.stop(); tcRec = null;
+    try { tcRec.stop(); } catch(e){}
+    tcRec = null;
     tcStopWave();
     document.getElementById('tc-mic').className='tc-mic';
     return;
@@ -1164,7 +1165,38 @@ function tcMic() {
   }).catch(()=>tcStartWave());
   tcRec = new SR();
   tcRec.lang = 'zh-CN';
-  tcRec.onstart = () => document.getElementById('tc-mic').className='tc-mic on';
+  tcRec.continuous = false;
+  tcRec.interimResults = false;
+  let tcSilenceTimer = null;
+  const tcRecStop = () => {
+    if (tcSilenceTimer) { clearTimeout(tcSilenceTimer); tcSilenceTimer = null; }
+    if (tcRec) { try { tcRec.stop(); } catch(e){} tcRec = null; }
+    tcStopWave();
+    document.getElementById('tc-mic').className = 'tc-mic';
+  };
+  // Silence detection — stop 1.5s after volume drops below threshold
+  const tcCheckSilence = () => {
+    if (!tcAnalyser || !tcRec) return;
+    const d = new Uint8Array(tcAnalyser.frequencyBinCount);
+    tcAnalyser.getByteFrequencyData(d);
+    const vol = d.reduce((a,b)=>a+b,0) / d.length / 255;
+    if (vol < 0.02) {
+      // silence detected
+      if (!tcSilenceTimer) {
+        tcSilenceTimer = setTimeout(() => {
+          if (tcRec) tcRecStop();
+        }, 1500);
+      }
+    } else {
+      // sound detected — reset silence timer
+      if (tcSilenceTimer) { clearTimeout(tcSilenceTimer); tcSilenceTimer = null; }
+    }
+    if (tcRec) requestAnimationFrame(tcCheckSilence);
+  };
+  tcRec.onstart = () => {
+    document.getElementById('tc-mic').className='tc-mic on';
+    requestAnimationFrame(tcCheckSilence);
+  };
   tcRec.onresult = e => {
     const t = e.results[0][0].transcript;
     const inp = document.getElementById('tc-inp');
@@ -1172,15 +1204,10 @@ function tcMic() {
     inp.style.height = 'auto';
     inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
     document.getElementById('tc-send').disabled = false;
-    tcRec = null;
-    tcStopWave();
-    document.getElementById('tc-mic').className='tc-mic';
+    tcRecStop();
   };
-  tcRec.onerror = tcRec.onend = () => {
-    tcRec = null;
-    tcStopWave();
-    document.getElementById('tc-mic').className='tc-mic';
-  };
+  tcRec.onerror = () => tcRecStop();
+  tcRec.onend = () => { if (tcRec) tcRecStop(); };
   tcRec.start();
 }
 </script>
