@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%230a1628%22/><path d=%22M16 8v16M9 12h14%22 stroke=%22%2322c55e%22 stroke-width=%222.8%22 stroke-linecap=%22round%22/></svg>"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Trusio — Complete B2B Credit Risk Management for Australian Suppliers</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
@@ -285,6 +285,8 @@ footer{background:#060e1a;padding:48px 56px;}
   .risk-grid{grid-template-columns:1fr!important;}
   .compare-mobile{grid-template-columns:1fr!important;}
   .risk-section{padding:56px 20px!important;}
+  #compare{padding:56px 20px!important;}
+  #compare > div > div:last-child{grid-template-columns:1fr!important;}
   .cta-section{padding:64px 20px;}
   .cta-section h2{font-size:28px;}
   .footer-row{flex-direction:column;gap:20px;text-align:center;}
@@ -315,12 +317,13 @@ footer{background:#060e1a;padding:48px 56px;}
       <h1>Stop bad debt<br/><span>before it happens.</span></h1>
       <p class="hero-sub">Verify customers, set credit limits, secure your position, and get paid faster — all in one platform.</p>
       <div class="hero-btns">
-        <button class="btn-green-lg" onclick="window.location.href='https://app.trusio.com.au'">Start your first credit check</button>
-        <button class="btn-outline-lg" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">See how it works</button>
+        <button class="btn-green-lg" onclick="window.location.href='https://app.trusio.com.au'" style="font-size:17px;padding:16px 36px;">Get started free — takes 5 minutes</button>
+        <button class="btn-outline-lg" onclick="document.getElementById('compare').scrollIntoView({behavior:'smooth'})">See how it works ↓</button>
       </div>
       <p class="hero-note">
         <span>✓ No setup fees</span>
         <span>✓ No lock-in</span>
+        <span>✓ 2 free reports to start</span>
         <span>✓ Australian-built</span>
       </p>
     </div>
@@ -402,6 +405,76 @@ footer{background:#060e1a;padding:48px 56px;}
 </div>
 
 <!-- RISK MANAGEMENT SECTION -->
+<!-- BEFORE vs AFTER -->
+<div id="compare" style="background:#fff;padding:96px 56px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <div class="tag">Why Trusio</div>
+      <h2>The old way vs <span>the Trusio way</span></h2>
+      <p class="sub sub-center">Most suppliers are still doing credit checks manually — wasting hours and missing red flags.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <!-- Before -->
+      <div style="background:#fef2f2;border:1.5px solid #fecaca;border-radius:20px;padding:32px;">
+        <div style="font-size:13px;font-weight:800;color:#dc2626;letter-spacing:.08em;margin-bottom:20px;">❌ THE OLD WAY</div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#fecaca;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;">✕</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">Email PDFs back and forth</div><div style="font-size:13px;color:#94a3b8;margin-top:3px;">Chase clients for signed forms for days</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#fecaca;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;">✕</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">Manual ABN lookup</div><div style="font-size:13px;color:#94a3b8;margin-top:3px;">Copy-paste into ABR website every time</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#fecaca;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;">✕</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">No Personal Guarantee</div><div style="font-size:13px;color:#94a3b8;margin-top:3px;">Or paper PG with no audit trail</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#fecaca;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;">✕</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">Documents scattered everywhere</div><div style="font-size:13px;color:#94a3b8;margin-top:3px;">Emails, folders, spreadsheets — impossible to find</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#fecaca;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;">✕</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">Gut feeling credit decisions</div><div style="font-size:13px;color:#94a3b8;margin-top:3px;">No data, no process, hope for the best</div></div>
+          </div>
+        </div>
+        <div style="margin-top:24px;padding:14px 18px;background:#fff;border-radius:10px;text-align:center;font-size:13px;color:#dc2626;font-weight:700;">⏱ 2–4 days to onboard one new client</div>
+      </div>
+      <!-- After -->
+      <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:20px;padding:32px;">
+        <div style="font-size:13px;font-weight:800;color:#16a34a;letter-spacing:.08em;margin-bottom:20px;">✅ THE TRUSIO WAY</div>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;color:#16a34a;">✓</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">Digital application link</div><div style="font-size:13px;color:#64748b;margin-top:3px;">Client fills online, you get notified instantly</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;color:#16a34a;">✓</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">Instant ABN & ASIC verification</div><div style="font-size:13px;color:#64748b;margin-top:3px;">Automatic government database check</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;color:#16a34a;">✓</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">Digital PG with witness + ID upload</div><div style="font-size:13px;color:#64748b;margin-top:3px;">Legally binding, signed in minutes</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;color:#16a34a;">✓</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">Evidence Pack in one click</div><div style="font-size:13px;color:#64748b;margin-top:3px;">PG + ID + audit trail — all in one PDF</div></div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:20px;height:20px;border-radius:50%;background:#bbf7d0;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:11px;color:#16a34a;">✓</div>
+            <div><div style="font-weight:700;font-size:15px;color:#1e293b;">Data-driven credit decisions</div><div style="font-size:13px;color:#64748b;margin-top:3px;">Credit score, risk level, recommended limit</div></div>
+          </div>
+        </div>
+        <div style="margin-top:24px;padding:14px 18px;background:#fff;border-radius:10px;text-align:center;font-size:13px;color:#16a34a;font-weight:700;">⚡ Same day — application to approved</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <button class="btn-green-lg" onclick="window.location.href='https://app.trusio.com.au'" style="font-size:16px;padding:15px 40px;">Get started — 2 free reports, no credit card</button>
+    </div>
+  </div>
+</div>
+
 <div class="risk-section" style="background:#fff;padding:96px 56px;">
   <div style="max-width:1100px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:56px;">
@@ -582,62 +655,14 @@ footer{background:#060e1a;padding:48px 56px;}
 
 
 <!-- COMPARE: Without vs With -->
-<div style="background:#fff;border-top:1px solid #f1f5f9;">
-  <div class="section">
-    <div class="section-header">
-      <div class="tag">The difference</div>
-      <h2>Without Trusio vs <span>With Trusio</span></h2>
-      <p class="sub sub-center">Most businesses don't lose money on bad products. They lose it on bad customers.</p>
-    </div>
-    <div class="compare-mobile" style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #e2e8f0;border-radius:20px;overflow:hidden;max-width:900px;margin:0 auto;">
-      <div style="padding:44px 48px;background:#fafaf8;">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#dc2626;margin-bottom:28px;">❌ Without Trusio</div>
-        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;">
-          <div style="width:22px;height:22px;border-radius:50%;background:#fef2f2;color:#dc2626;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;">✕</div>
-          <div><div style="font-size:15px;font-weight:600;color:#374151;">Unknown customers</div><div style="font-size:13px;color:#9ca3af;margin-top:2px;">Trading blind. No idea who's behind the ABN.</div></div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;">
-          <div style="width:22px;height:22px;border-radius:50%;background:#fef2f2;color:#dc2626;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;">✕</div>
-          <div><div style="font-size:15px;font-weight:600;color:#374151;">No credit limits</div><div style="font-size:13px;color:#9ca3af;margin-top:2px;">Unlimited exposure with every new account.</div></div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;">
-          <div style="width:22px;height:22px;border-radius:50%;background:#fef2f2;color:#dc2626;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;">✕</div>
-          <div><div style="font-size:15px;font-weight:600;color:#374151;">No legal protection</div><div style="font-size:13px;color:#9ca3af;margin-top:2px;">Nothing signed. Nothing secured. Nothing to stand on.</div></div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;">
-          <div style="width:22px;height:22px;border-radius:50%;background:#fef2f2;color:#dc2626;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;">✕</div>
-          <div><div style="font-size:15px;font-weight:600;color:#374151;">Chasing payments</div><div style="font-size:13px;color:#9ca3af;margin-top:2px;">30, 60, 90 days overdue. Your cashflow suffers.</div></div>
-        </div>
-      </div>
-      <div style="padding:44px 48px;background:#0a1628;border-left:1px solid rgba(255,255,255,.06);border-top:1px solid rgba(255,255,255,.06);">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:28px;">✓ With Trusio</div>
-        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;">
-          <div style="width:22px;height:22px;border-radius:50%;background:rgba(22,163,74,.15);color:#4ade80;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;">✓</div>
-          <div><div style="font-size:15px;font-weight:600;color:#fff;">Verified customers</div><div style="font-size:13px;color:rgba(255,255,255,.45);margin-top:2px;">ABN verified, credit checked, identity confirmed.</div></div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;">
-          <div style="width:22px;height:22px;border-radius:50%;background:rgba(22,163,74,.15);color:#4ade80;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;">✓</div>
-          <div><div style="font-size:15px;font-weight:600;color:#fff;">Controlled exposure</div><div style="font-size:13px;color:rgba(255,255,255,.45);margin-top:2px;">Data-driven limits. Know exactly how much to risk.</div></div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;">
-          <div style="width:22px;height:22px;border-radius:50%;background:rgba(22,163,74,.15);color:#4ade80;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;">✓</div>
-          <div><div style="font-size:15px;font-weight:600;color:#fff;">Secured position</div><div style="font-size:13px;color:rgba(255,255,255,.45);margin-top:2px;">Personal Guarantee signed. Your risk, documented.</div></div>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:14px;">
-          <div style="width:22px;height:22px;border-radius:50%;background:rgba(22,163,74,.15);color:#4ade80;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:2px;">✓</div>
-          <div><div style="font-size:15px;font-weight:600;color:#fff;">Faster cashflow</div><div style="font-size:13px;color:rgba(255,255,255,.45);margin-top:2px;">Better clients, cleaner books, money in faster.</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+
 
 <!-- BENEFITS -->
 <div style="background:#fff;">
   <div class="section">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="benefits-grid">
       <div>
-        <div class="tag">Why Trusio</div>
+        <div class="tag">The bigger picture</div>
         <h2>Control who you trade with.<br/><span>And how you get paid.</span></h2>
         <p class="sub" style="margin-bottom:12px;font-style:italic;color:#64748b;">"A credit report is just a photo of the past. Trusio is a control system for your future."</p>
         <p class="sub" style="margin-bottom:36px;">Credit isn't just about risk. Used correctly, it's how you grow faster — without losing control.</p>
@@ -754,7 +779,7 @@ footer{background:#060e1a;padding:48px 56px;}
           <li>Custom credit policy</li>
           <li>Your logo / white label</li>
         </ul>
-        <button class="price-btn-dark">Start free trial</button>
+        <button class="price-btn-dark">Start free — 2 reports</button>
       </div>
       <div class="price-card reveal">
         <div class="price-plan">Enterprise</div>
@@ -885,10 +910,18 @@ footer{background:#060e1a;padding:48px 56px;}
 
 <!-- CTA -->
 <div class="cta-section">
-  <h2>Ready to stop guessing<br/>who to <span>trust?</span></h2>
-  <p>Control who you trade with, and how you get paid.</p>
-  <button class="btn-green-lg" style="position:relative;" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Start your free trial</button>
-  <p class="cta-note"><span>✓</span> 14 days free &nbsp;·&nbsp; <span>✓</span> No credit card &nbsp;·&nbsp; <span>✓</span> Setup in 10 minutes</p>
+  <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:.1em;margin-bottom:16px;">BUILT FOR AUSTRALIAN SUPPLIERS</div>
+  <h2>Your next bad debt<br/>could be <span>the last one.</span></h2>
+  <p>Join suppliers who've replaced paper forms and gut feeling with a system that actually protects them.</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;">
+    <button class="btn-green-lg" style="font-size:17px;padding:16px 40px;" onclick="window.location.href='https://app.trusio.com.au'">Get started free — 2 reports on us</button>
+  </div>
+  <p class="cta-note">
+    <span>✓</span> Setup in 10 minutes &nbsp;·&nbsp;
+    <span>✓</span> First credit check today &nbsp;·&nbsp;
+    <span>✓</span> Cancel anytime &nbsp;·&nbsp;
+    <span>✓</span> Australian-built & hosted
+  </p>
 </div>
 
 <!-- FOOTER -->
@@ -920,296 +953,6 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } });
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-</script>
-
-<!-- AI CHAT WIDGET -->
-<style>
-#tc-btn{position:fixed;bottom:24px;right:24px;z-index:9999;width:54px;height:54px;border-radius:50%;background:var(--navy);border:2px solid rgba(34,197,94,.4);cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.3);font-size:22px;color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .15s;}
-#tc-btn:hover{transform:scale(1.08);}
-#tc-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9998;}
-#tc-overlay.open{display:block;}
-#tc-box{position:fixed;bottom:90px;right:24px;z-index:9999;width:340px;height:480px;background:#fff;border-radius:16px;border:1px solid #e2e8f0;box-shadow:0 8px 40px rgba(0,0,0,.18);display:none;flex-direction:column;overflow:hidden;font-family:'Plus Jakarta Sans',sans-serif;}
-#tc-box.open{display:flex;}
-@media(max-width:600px){
-  #tc-overlay.open{display:block;}
-  #tc-box{position:fixed;top:0;left:0;right:0;bottom:0;width:100vw!important;height:100dvh!important;border-radius:0;border:none;z-index:9999;overflow:hidden;}
-  #tc-btn{bottom:16px;right:16px;width:48px;height:48px;font-size:20px;}
-  .tc-msgs{flex:1;padding:12px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-  .tc-msg{max-width:85%;word-break:break-word;overflow-wrap:break-word;}
-  .tc-inp-row{display:flex;flex-direction:row;align-items:flex-end;gap:6px;padding:8px 10px;padding-bottom:max(8px,env(safe-area-inset-bottom));flex-shrink:0;width:100%;box-sizing:border-box;}
-  .tc-inp{flex:1;min-width:0;max-width:calc(100% - 88px);font-size:16px;resize:none;max-height:96px;overflow-y:auto;line-height:1.5;}
-  .tc-mic,.tc-send{flex-shrink:0;width:36px;height:36px;align-self:flex-end;}
-}
-.tc-hdr{background:var(--navy);padding:14px 16px;display:flex;align-items:center;gap:10px;}
-.tc-hdr-icon{width:32px;height:32px;border-radius:8px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
-.tc-hdr-name{font-size:13px;font-weight:700;color:#fff;}
-.tc-hdr-sub{font-size:10px;color:rgba(255,255,255,.5);}
-.tc-close{background:none;border:none;color:rgba(255,255,255,.5);font-size:20px;cursor:pointer;margin-left:auto;line-height:1;padding:0;}
-.tc-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
-.tc-msg{max-width:84%;padding:9px 12px;border-radius:12px;font-size:12px;line-height:1.7;white-space:pre-wrap;}
-.tc-msg.bot{background:#f1f5f9;color:#1e293b;border-radius:12px 12px 12px 2px;align-self:flex-start;}
-.tc-msg.user{background:var(--navy);color:#fff;border-radius:12px 12px 2px 12px;align-self:flex-end;}
-.tc-thinking{font-size:12px;color:#94a3b8;padding:9px 14px;background:#f1f5f9;border-radius:12px 12px 12px 2px;align-self:flex-start;animation:tc-pulse 1s infinite;}
-@keyframes tc-pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.tc-inp-row{padding:10px 12px;border-top:1px solid #f1f5f9;display:flex;gap:6px;align-items:center;}
-.tc-inp{flex:1;border:1.5px solid #e2e8f0;border-radius:9px;padding:8px 11px;font-size:13px;line-height:1.5;outline:none;font-family:inherit;resize:none;}
-.tc-inp:focus{border-color:var(--green);}
-.tc-mic{width:34px;height:34px;border-radius:8px;border:1.5px solid #e2e8f0;background:#f8fafc;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.tc-mic.on{border-color:#dc2626;background:#fef2f2;}
-.tc-send{width:34px;height:34px;border-radius:8px;border:none;background:var(--navy);color:#fff;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
-.tc-send:hover{background:#1d4ed8;}
-.tc-send:disabled{background:#e2e8f0;cursor:not-allowed;}
-</style>
-
-<div id="tc-overlay" onclick="tcToggle()"></div>
-<button id="tc-btn" onclick="tcToggle()" aria-label="Chat with Trusio Assistant">💬</button>
-<div id="tc-box" role="dialog" aria-label="Trusio AI Assistant">
-  <div class="tc-hdr">
-    <div class="tc-hdr-icon">⬡</div>
-    <div>
-      <div class="tc-hdr-name">Trusio Assistant</div>
-      <div class="tc-hdr-sub">AI Support · 智能客服</div>
-    </div>
-    <button class="tc-close" onclick="tcToggle()" aria-label="Close">×</button>
-  </div>
-  <div class="tc-msgs" id="tc-msgs">
-    <div class="tc-msg bot">Hi! I'm Trusio Assistant 👋 How can I help you today?<br/><br/>你好！我是 Trusio 助手，有什么可以帮你的吗？</div>
-  </div>
-  <div class="tc-inp-row">
-    <div style="flex:1;min-width:0;position:relative;display:flex;align-items:center;">
-      <textarea class="tc-inp" id="tc-inp" placeholder="Ask a question · 输入问题..." rows="1"
-        onkeydown="if(event.key==='Enter'&&!event.shiftKey&&!tcComposing){event.preventDefault();tcSend();}"
-        oncompositionstart="tcComposing=true"
-        oncompositionend="tcComposing=false;document.getElementById('tc-send').disabled=!this.value.trim()"
-        oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px';document.getElementById('tc-send').disabled=!this.value.trim()"></textarea>
-      <canvas id="tc-wave" style="display:none;position:absolute;left:0;top:0;width:100%;height:100%;border-radius:9px;pointer-events:none;"></canvas>
-    </div>
-    <button class="tc-mic" id="tc-mic" onclick="tcMic()" title="Voice input">🎤</button>
-    <button class="tc-send" id="tc-send" onclick="tcSend()" disabled title="Send">↑</button>
-  </div>
-</div>
-
-<script>
-const TC_SYSTEM = `You are Trusio Assistant, the AI support agent for Trusio — an Australian credit and cashflow control platform for B2B suppliers and trade businesses.
-
-You help with:
-1. What Trusio does and how it works — credit onboarding, ABN verification, credit reports, Personal Guarantees, trade references, dashboard
-2. Credit application process — the 6-step flow, what each step means, what action is needed
-3. ABN, ASIC, Personal Guarantee (PG) explanations for Australian businesses
-4. PPSR registration (~$7 at ppsr.gov.au), Trade Credit Insurance (Atradius, QBE), Invoice Finance (Octet, Earlypay)
-5. Pricing and getting started with Trusio
-
-Rules:
-- Friendly, professional, concise — like talking to a knowledgeable colleague
-- Respond in English or Chinese depending on what the user uses
-- For legal or financial advice: "For more details, visit trusio.com.au or contact our team at chen@futureone.au"
-- Never make up information. If unsure, direct to trusio.com.au
-- Keep answers short and practical for Australian trade/construction business owners`;
-
-let tcMsgs = [{role:'assistant',content:"Hi! I'm Trusio Assistant 👋 How can I help you today?\n\n你好！我是 Trusio 助手，有什么可以帮你的吗？"}];
-let tcLoading = false;
-let tcComposing = false;
-let tcRec = null;
-
-function tcToggle() {
-  const box = document.getElementById('tc-box');
-  const btn = document.getElementById('tc-btn');
-  const overlay = document.getElementById('tc-overlay');
-  const isOpen = box.classList.toggle('open');
-  overlay.classList.toggle('open', isOpen);
-  btn.textContent = isOpen ? '×' : '💬';
-  // 手机上打开时禁止背景滚动
-  document.body.style.overflow = isOpen && window.innerWidth <= 600 ? 'hidden' : '';
-  if (isOpen) setTimeout(() => document.getElementById('tc-inp').focus(), 100);
-}
-
-async function tcSend() {
-  const inp = document.getElementById('tc-inp');
-  const text = inp.value.trim();
-  if (!text || tcLoading) return;
-  inp.value = ''; inp.style.height = 'auto';
-  document.getElementById('tc-send').disabled = true;
-  tcAddMsg('user', text);
-  tcMsgs.push({role:'user', content:text});
-  tcLoading = true;
-  const thinking = document.createElement('div');
-  thinking.className = 'tc-thinking'; thinking.id = 'tc-thinking'; thinking.textContent = 'Thinking...';
-  document.getElementById('tc-msgs').appendChild(thinking);
-  tcScroll();
-  try {
-    const res = await fetch('/api/chat', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({system:TC_SYSTEM, messages:tcMsgs})
-    });
-    const data = await res.json();
-    const reply = data.content?.[0]?.text || "Sorry, I couldn't process that. Please try again.";
-    tcMsgs.push({role:'assistant', content:reply});
-    document.getElementById('tc-thinking')?.remove();
-    tcAddMsg('bot', reply);
-    tcSpeak(reply);
-  } catch(e) {
-    document.getElementById('tc-thinking')?.remove();
-    tcAddMsg('bot', 'Connection error. Please try again.');
-  }
-  tcLoading = false;
-}
-
-function tcAddMsg(role, text) {
-  const div = document.createElement('div');
-  div.className = 'tc-msg ' + role;
-  div.textContent = text;
-  document.getElementById('tc-msgs').appendChild(div);
-  tcScroll();
-}
-
-function tcScroll() {
-  const m = document.getElementById('tc-msgs');
-  setTimeout(() => m.scrollTop = m.scrollHeight, 50);
-}
-
-async function tcSpeak(text) {
-  try {
-    const plain = text.replace(/[#*`>]/g,'').slice(0,500);
-    const res = await fetch('/api/tts', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({text:plain})});
-    if (!res.ok) throw new Error();
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const audio = new Audio(url);
-    audio.onended = () => URL.revokeObjectURL(url);
-    audio.play();
-  } catch(e) {
-    if (!window.speechSynthesis) return;
-    const plain = text.replace(/[#*`>]/g,'').slice(0,300);
-    const utt = new SpeechSynthesisUtterance(plain);
-    utt.lang = /[\u4e00-\u9fff]/.test(plain) ? 'zh-CN' : 'en-AU';
-    window.speechSynthesis.speak(utt);
-  }
-}
-
-let tcAudioCtx = null, tcAnalyser = null, tcAudioStream = null, tcWaveRAF = null;
-
-function tcStartWave() {
-  const canvas = document.getElementById('tc-wave');
-  const inp = document.getElementById('tc-inp');
-  canvas.style.display = 'block';
-  canvas.width = inp.offsetWidth;
-  canvas.height = inp.offsetHeight;
-  const ctx = canvas.getContext('2d');
-  const bars = 28;
-  const levels = new Array(bars).fill(0);
-  function draw() {
-    tcWaveRAF = requestAnimationFrame(draw);
-    let vol = 0;
-    if (tcAnalyser) {
-      const d = new Uint8Array(tcAnalyser.frequencyBinCount);
-      tcAnalyser.getByteFrequencyData(d);
-      vol = d.reduce((a,b)=>a+b,0) / d.length / 255;
-    }
-    levels.shift();
-    levels.push(vol);
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    // background
-    ctx.fillStyle = '#0a1628';
-    ctx.beginPath();
-    ctx.roundRect(0,0,canvas.width,canvas.height,9);
-    ctx.fill();
-    // bars
-    const bw = canvas.width / bars;
-    const maxH = canvas.height * 0.7;
-    const centerY = canvas.height / 2;
-    levels.forEach((v,i) => {
-      const h = Math.max(3, v * maxH + Math.sin(Date.now()/200+i)*2*v);
-      const x = i * bw + bw/2;
-      const alpha = 0.4 + v * 0.6;
-      ctx.fillStyle = `rgba(34,197,94,${alpha})`;
-      ctx.beginPath();
-      ctx.roundRect(x - bw*0.3, centerY - h/2, bw*0.6, h, 2);
-      ctx.fill();
-    });
-    // mic label
-    ctx.fillStyle = 'rgba(255,255,255,0.5)';
-    ctx.font = '11px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('Listening... · 聆听中', canvas.width/2, canvas.height - 6);
-  }
-  draw();
-}
-
-function tcStopWave() {
-  if (tcWaveRAF) { cancelAnimationFrame(tcWaveRAF); tcWaveRAF = null; }
-  const canvas = document.getElementById('tc-wave');
-  canvas.style.display = 'none';
-  if (tcAudioStream) { tcAudioStream.getTracks().forEach(t=>t.stop()); tcAudioStream = null; }
-  if (tcAudioCtx) { tcAudioCtx.close(); tcAudioCtx = null; tcAnalyser = null; }
-}
-
-function tcMic() {
-  if (tcRec) {
-    try { tcRec.stop(); } catch(e){}
-    tcRec = null;
-    tcStopWave();
-    document.getElementById('tc-mic').className='tc-mic';
-    return;
-  }
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) { alert('Voice input requires Chrome browser.'); return; }
-  // Start audio analyser for waveform
-  navigator.mediaDevices.getUserMedia({audio:true}).then(stream => {
-    tcAudioStream = stream;
-    tcAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    tcAnalyser = tcAudioCtx.createAnalyser();
-    tcAnalyser.fftSize = 64;
-    tcAudioCtx.createMediaStreamSource(stream).connect(tcAnalyser);
-    tcStartWave();
-  }).catch(()=>tcStartWave());
-  tcRec = new SR();
-  tcRec.lang = 'zh-CN';
-  tcRec.continuous = false;
-  tcRec.interimResults = false;
-  let tcSilenceTimer = null;
-  const tcRecStop = () => {
-    if (tcSilenceTimer) { clearTimeout(tcSilenceTimer); tcSilenceTimer = null; }
-    if (tcRec) { try { tcRec.stop(); } catch(e){} tcRec = null; }
-    tcStopWave();
-    document.getElementById('tc-mic').className = 'tc-mic';
-  };
-  // Silence detection — stop 1.5s after volume drops below threshold
-  const tcCheckSilence = () => {
-    if (!tcAnalyser || !tcRec) return;
-    const d = new Uint8Array(tcAnalyser.frequencyBinCount);
-    tcAnalyser.getByteFrequencyData(d);
-    const vol = d.reduce((a,b)=>a+b,0) / d.length / 255;
-    if (vol < 0.02) {
-      // silence detected
-      if (!tcSilenceTimer) {
-        tcSilenceTimer = setTimeout(() => {
-          if (tcRec) tcRecStop();
-        }, 1500);
-      }
-    } else {
-      // sound detected — reset silence timer
-      if (tcSilenceTimer) { clearTimeout(tcSilenceTimer); tcSilenceTimer = null; }
-    }
-    if (tcRec) requestAnimationFrame(tcCheckSilence);
-  };
-  tcRec.onstart = () => {
-    document.getElementById('tc-mic').className='tc-mic on';
-    requestAnimationFrame(tcCheckSilence);
-  };
-  tcRec.onresult = e => {
-    const t = e.results[0][0].transcript;
-    const inp = document.getElementById('tc-inp');
-    inp.value = t;
-    inp.style.height = 'auto';
-    inp.style.height = Math.min(inp.scrollHeight, 120) + 'px';
-    document.getElementById('tc-send').disabled = false;
-    tcRecStop();
-  };
-  tcRec.onerror = () => tcRecStop();
-  tcRec.onend = () => { if (tcRec) tcRecStop(); };
-  tcRec.start();
-}
 </script>
 </body>
 </html>
