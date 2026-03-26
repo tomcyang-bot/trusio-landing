@@ -1055,4 +1055,11 @@ async function tcSend(){
   document.getElementById('tc-send').disabled = false;
 }
 
-document.getElementById('tc-input').addEv
+document.getElementById('tc-input').addEventListener('input', function(){
+  this.style.height='auto';
+  this.style.height=Math.min(this.scrollHeight,96)+'px';
+});
+</script>
+
+</body>
+</html>
