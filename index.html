@@ -791,7 +791,7 @@ footer{background:#060e1a;padding:48px 56px;}
           <li>Dedicated account manager</li>
           <li>Custom integrations</li>
         </ul>
-        <button class="price-btn-dark" onclick="window.location.href='mailto:hello@trusio.com.au'">Contact us</button>
+        <button class="price-btn-dark" onclick="tcOpen=false;tcToggle();tcSetTab('contact');">Contact us</button>
       </div>
     </div>
   </div>
@@ -928,7 +928,7 @@ footer{background:#060e1a;padding:48px 56px;}
     <div class="footer-links">
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
-      <a href="/cdn-cgi/l/email-protection#b0d3d8d5def0d6c5c4c5c2d5dfded59ed1c5">Contact</a>
+      <a href="#" onclick="tcOpen=false;tcToggle();tcSetTab('contact');return false;">Contact</a>
       <a href="https://app.trusio.com.au">Login →</a>
     </div>
   </div>
