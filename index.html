@@ -987,19 +987,53 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
       </div>
       <div>
         <div style="color:#fff;font-weight:700;font-size:14px;">Trusio Assistant</div>
-        <div style="color:rgba(255,255,255,.4);font-size:11px;">Ask me anything about Trusio</div>
+        <div style="color:rgba(255,255,255,.4);font-size:11px;">AI Support & Contact</div>
       </div>
     </div>
     <button onclick="tcToggle()" style="background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:20px;padding:0;">✕</button>
   </div>
-  <div id="tc-msgs">
-    <div class="tc-msg bot">Hi! I'm the Trusio assistant. Ask me anything about how Trusio works, pricing, or how to get started. 👋</div>
+  <!-- Tabs -->
+  <div style="display:flex;border-bottom:1px solid #f1f5f9;">
+    <button id="tc-tab-ai" onclick="tcSetTab('ai')" style="flex:1;padding:9px 0;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;color:#1d4ed8;border-bottom:2px solid #1d4ed8;">💬 Ask AI</button>
+    <button id="tc-tab-contact" onclick="tcSetTab('contact')" style="flex:1;padding:9px 0;border:none;background:none;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;color:#94a3b8;border-bottom:2px solid transparent;">📋 Contact Us</button>
   </div>
-  <div id="tc-input-row">
-    <textarea id="tc-input" rows="1" placeholder="Ask a question..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();tcSend();}"></textarea>
-    <button id="tc-send" onclick="tcSend()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
+  <!-- AI Chat -->
+  <div id="tc-ai-panel">
+    <div id="tc-msgs">
+      <div class="tc-msg bot">Hi! I'm the Trusio assistant. Ask me anything about how Trusio works, pricing, or how to get started. 👋</div>
+    </div>
+    <div id="tc-input-row">
+      <textarea id="tc-input" rows="1" placeholder="Ask a question..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();tcSend();}"></textarea>
+      <button id="tc-send" onclick="tcSend()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+  <!-- Contact Us -->
+  <div id="tc-contact-panel" style="display:none;padding:16px;overflow-y:auto;flex:1;">
+    <div id="tc-contact-sent" style="display:none;text-align:center;padding:32px 16px;">
+      <div style="font-size:36px;margin-bottom:12px;">✅</div>
+      <div style="font-size:15px;font-weight:700;color:#16a34a;margin-bottom:8px;">Message sent!</div>
+      <div style="font-size:12px;color:#64748b;margin-bottom:16px;">We'll get back to you within 1 business day.</div>
+      <button onclick="tcResetContact()" style="font-size:12px;font-weight:600;padding:8px 20px;border-radius:8px;border:1.5px solid #e2e8f0;background:#fff;cursor:pointer;">Send another</button>
+    </div>
+    <div id="tc-contact-form">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div><div style="font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.06em;margin-bottom:4px;">NAME *</div><input id="cf-name" placeholder="Your name" style="width:100%;border:1.5px solid #e2e8f0;border-radius:7px;padding:8px 10px;font-size:12px;outline:none;font-family:inherit;box-sizing:border-box;"/></div>
+        <div><div style="font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.06em;margin-bottom:4px;">COMPANY</div><input id="cf-company" placeholder="Company name" style="width:100%;border:1.5px solid #e2e8f0;border-radius:7px;padding:8px 10px;font-size:12px;outline:none;font-family:inherit;box-sizing:border-box;"/></div>
+        <div><div style="font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.06em;margin-bottom:4px;">PHONE</div><input id="cf-phone" placeholder="02 9999 0000" style="width:100%;border:1.5px solid #e2e8f0;border-radius:7px;padding:8px 10px;font-size:12px;outline:none;font-family:inherit;box-sizing:border-box;"/></div>
+        <div><div style="font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.06em;margin-bottom:4px;">EMAIL *</div><input id="cf-email" placeholder="you@company.com" style="width:100%;border:1.5px solid #e2e8f0;border-radius:7px;padding:8px 10px;font-size:12px;outline:none;font-family:inherit;box-sizing:border-box;"/></div>
+      </div>
+      <div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.06em;margin-bottom:4px;">SERVICE</div>
+        <select id="cf-service" style="width:100%;border:1.5px solid #e2e8f0;border-radius:7px;padding:8px 10px;font-size:12px;outline:none;font-family:inherit;background:#fff;">
+          <option>General</option><option>PPSR Registration</option><option>Trade Credit Insurance</option><option>Invoice Finance</option><option>Credit Report</option><option>Other</option>
+        </select>
+      </div>
+      <div style="margin-bottom:12px;"><div style="font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.06em;margin-bottom:4px;">MESSAGE *</div>
+        <textarea id="cf-message" rows="3" placeholder="How can we help you?" style="width:100%;border:1.5px solid #e2e8f0;border-radius:7px;padding:8px 10px;font-size:12px;outline:none;font-family:inherit;resize:vertical;box-sizing:border-box;"></textarea>
+      </div>
+      <button onclick="tcSubmitContact()" style="width:100%;padding:10px 0;border-radius:8px;border:none;background:#0a1628;color:#fff;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;">Send Message →</button>
+    </div>
   </div>
 </div>
 
@@ -1007,6 +1041,51 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 var tcOpen = false;
 var tcMsgs = [];
 var tcLoading = false;
+var tcCurrentTab = 'ai';
+
+function tcSetTab(tab) {
+  tcCurrentTab = tab;
+  document.getElementById('tc-ai-panel').style.display = tab==='ai' ? 'flex' : 'none';
+  document.getElementById('tc-ai-panel').style.flexDirection = 'column';
+  document.getElementById('tc-contact-panel').style.display = tab==='contact' ? 'flex' : 'none';
+  document.getElementById('tc-contact-panel').style.flexDirection = 'column';
+  document.getElementById('tc-tab-ai').style.color = tab==='ai' ? '#1d4ed8' : '#94a3b8';
+  document.getElementById('tc-tab-ai').style.borderBottom = tab==='ai' ? '2px solid #1d4ed8' : '2px solid transparent';
+  document.getElementById('tc-tab-contact').style.color = tab==='contact' ? '#1d4ed8' : '#94a3b8';
+  document.getElementById('tc-tab-contact').style.borderBottom = tab==='contact' ? '2px solid #1d4ed8' : '2px solid transparent';
+}
+
+async function tcSubmitContact() {
+  var name = document.getElementById('cf-name').value.trim();
+  var email = document.getElementById('cf-email').value.trim();
+  var message = document.getElementById('cf-message').value.trim();
+  if (!name || !email || !message) { alert('Please fill in Name, Email and Message'); return; }
+  var company = document.getElementById('cf-company').value;
+  var phone = document.getElementById('cf-phone').value;
+  var service = document.getElementById('cf-service').value;
+  try {
+    await fetch('/api/chat', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        messages:[{role:'user', content:`Contact form submission:\nName: ${name}\nCompany: ${company}\nPhone: ${phone}\nEmail: ${email}\nService: ${service}\nMessage: ${message}`}],
+        system: 'You are receiving a contact form submission. Forward this to chen@futureone.au. Reply with just "received".',
+        contactForm: {name, company, phone, email, service, message}
+      })
+    });
+  } catch(e) {}
+  document.getElementById('tc-contact-form').style.display = 'none';
+  document.getElementById('tc-contact-sent').style.display = 'block';
+}
+
+function tcResetContact() {
+  document.getElementById('cf-name').value='';
+  document.getElementById('cf-company').value='';
+  document.getElementById('cf-phone').value='';
+  document.getElementById('cf-email').value='';
+  document.getElementById('cf-message').value='';
+  document.getElementById('tc-contact-form').style.display = 'block';
+  document.getElementById('tc-contact-sent').style.display = 'none';
+}
 var tcSystem = "You are a helpful assistant for Trusio, a credit and cashflow control platform for Australian B2B suppliers. Trusio helps suppliers verify customers (ABN/ASIC), assess credit risk, collect digital Personal Guarantees with witnesses and ID upload, generate Evidence Packs, and manage the full credit onboarding process. Pricing: Free plan available, Pro $59/mo (includes first managed credit report free, then $60/report). Website: trusio.com.au. App: app.trusio.com.au. IMPORTANT: Detect the language of the user's message and always respond in the same language. If they write in Chinese, respond in Chinese. If they write in English, respond in English.";
 
 function tcToggle(){
