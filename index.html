@@ -359,7 +359,7 @@ footer{background:#060e1a;padding:48px 56px;}
 
 <!-- FEATURE CARDS -->
 <div class="feat-strip">
-  <div class="feat-strip-grid" style="grid-template-columns:repeat(5,1fr);">
+  <div class="feat-strip-grid" style="grid-template-columns:repeat(4,1fr);">
     <div class="feat-card reveal">
       <div class="feat-icon">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -400,18 +400,6 @@ footer{background:#060e1a;padding:48px 56px;}
       </div>
       <h3>24-hour Onboarding</h3>
       <p style="font-size:13px;color:rgba(255,255,255,.4);margin-top:10px;line-height:1.7;">From application to approval</p>
-    </div>
-    <div class="feat-card reveal">
-      <div class="feat-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/>
-          <path d="M12 8v4l3 3"/>
-          <path d="M9 12h3"/>
-          <circle cx="12" cy="12" r="3" fill="#22c55e" fill-opacity="0.3"/>
-        </svg>
-      </div>
-      <h3>AI Risk Assessment</h3>
-      <p style="font-size:13px;color:rgba(255,255,255,.4);margin-top:10px;line-height:1.7;">Smart credit scoring & limit recommendations</p>
     </div>
   </div>
 </div>
@@ -940,14 +928,14 @@ footer{background:#060e1a;padding:48px 56px;}
     <div class="footer-links">
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
-      <a href="mailto:chen@futureone.au">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#b0d3d8d5def0d6c5c4c5c2d5dfded59ed1c5">Contact</a>
       <a href="https://app.trusio.com.au">Login →</a>
     </div>
   </div>
   <div class="footer-copy">© 2026 Trusio · Built in Australia 🇦🇺</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // FAQ
 document.querySelectorAll('.faq-item').forEach(item => {
   item.querySelector('.faq-q').addEventListener('click', () => {
@@ -1019,7 +1007,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 var tcOpen = false;
 var tcMsgs = [];
 var tcLoading = false;
-var tcSystem = "You are a helpful assistant for Trusio, a credit and cashflow control platform for Australian B2B suppliers. Trusio helps suppliers verify customers (ABN/ASIC), assess credit risk, collect digital Personal Guarantees with witnesses and ID upload, generate Evidence Packs, and manage the full credit onboarding process. Pricing: Starter $49/mo, Pro $99/mo (includes 1 managed credit report), Business $199/mo (includes 3 managed credit reports). Free start with 2 reports. Website: trusio.com.au. App: app.trusio.com.au. IMPORTANT: Detect the language of the user's message and always respond in the same language. If they write in Chinese, respond in Chinese. If they write in English, respond in English.";
+var tcSystem = "You are a helpful assistant for Trusio, a credit and cashflow control platform for Australian B2B suppliers. Trusio helps suppliers verify customers (ABN/ASIC), assess credit risk, collect digital Personal Guarantees with witnesses and ID upload, generate Evidence Packs, and manage the full credit onboarding process. Pricing: Free plan available, Pro $59/mo (includes first managed credit report free, then $60/report). Website: trusio.com.au. App: app.trusio.com.au. IMPORTANT: Detect the language of the user's message and always respond in the same language. If they write in Chinese, respond in Chinese. If they write in English, respond in English.";
 
 function tcToggle(){
   tcOpen=!tcOpen;
@@ -1055,7 +1043,7 @@ async function tcSend(){
       body: JSON.stringify({messages: tcMsgs, system: tcSystem})
     });
     var data = await res.json();
-    var reply = data.content?.[0]?.text || "Sorry, I couldn't get a response. Please try again.";
+    var reply = data.reply || "Sorry, I couldn't get a response. Please try again.";
     typing.remove();
     tcAddMsg(reply, 'bot');
     tcMsgs.push({role:'assistant', content:reply});
@@ -1067,11 +1055,4 @@ async function tcSend(){
   document.getElementById('tc-send').disabled = false;
 }
 
-document.getElementById('tc-input').addEventListener('input', function(){
-  this.style.height='auto';
-  this.style.height=Math.min(this.scrollHeight,96)+'px';
-});
-</script>
-
-</body>
-</html>
+document.getElementById('tc-input').addEv
