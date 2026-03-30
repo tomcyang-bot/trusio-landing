@@ -1016,7 +1016,7 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 var tcOpen = false;
 var tcMsgs = [];
 var tcLoading = false;
-var tcSystem = "You are a helpful assistant for Trusio, a credit and cashflow control platform for Australian B2B suppliers. Trusio helps suppliers verify customers (ABN/ASIC), assess credit risk, collect digital Personal Guarantees with witnesses and ID upload, generate Evidence Packs, and manage the full credit onboarding process. Pricing: Starter $49/mo, Pro $99/mo (includes 1 managed credit report), Business $199/mo (includes 3 managed credit reportsd in the same language. If they write in Chinese, respond in Chinese. If they write in English, respond in English.";
+var tcSystem = "You are a helpful assistant for Trusio, a credit and cashflow control platform for Australian B2B suppliers. Trusio helps suppliers verify customers (ABN/ASIC), assess credit risk, collect digital Personal Guarantees with witnesses and ID upload, generate Evidence Packs, and manage the full credit onboarding process. Pricing: Free to sign up. $69 per credit report, no subscription required. Corporate plan $199/month includes 3 reports and dedicated support. Website: trusio.com.au. App: app.trusio.com.au. IMPORTANT: Detect the language of the user message and always respond in the same language. If they write in Chinese, respond in Chinese. If they write in English, respond in English.";
 
 var tcCurrentTab = 'ai';
 function tcSetTab(tab){
@@ -1045,7 +1045,7 @@ async function tcSubmitContact(){
         html:'<div style="font-family:sans-serif;padding:24px;"><h3>New Contact Form Submission</h3><p><strong>Name:</strong> '+name+'</p><p><strong>Email:</strong> '+email+'</p><p><strong>Message:</strong></p><p>'+msg+'</p></div>'
       })
     });
-    status.style.color='#16a34a'; status.textContent='Message sent! We'll be in touch soon.';
+    status.style.color='#16a34a'; status.textContent='Message sent! We will be in touch soon.';
     document.getElementById('tc-cf-name').value='';
     document.getElementById('tc-cf-email').value='';
     document.getElementById('tc-cf-msg').value='';
@@ -1087,7 +1087,7 @@ async function tcSend(){
       body: JSON.stringify({messages: tcMsgs, system: tcSystem})
     });
     var data = await res.json();
-    var reply = data.content?.[0]?.text || "Sorry, I couldn't get a response. Please try again.";
+    var reply = data.content?.[0]?.text || "Sorry, I could not get a response. Please try again.";
     typing.remove();
     tcAddMsg(reply, 'bot');
     tcMsgs.push({role:'assistant', content:reply});
