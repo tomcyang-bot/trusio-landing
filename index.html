@@ -1094,7 +1094,7 @@ async function tcSend(){
   document.getElementById('tc-send').disabled = true;
   var typing = tcAddMsg('...', 'bot typing');
   try {
-    var res = await fetch('/api/chat', {
+    var res = await fetch('https://app.trusio.com.au/api/chat', {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({messages: tcMsgs, system: tcSystem})
     });
