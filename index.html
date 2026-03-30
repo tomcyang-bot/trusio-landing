@@ -1099,7 +1099,7 @@ async function tcSend(){
       body: JSON.stringify({messages: tcMsgs, system: tcSystem})
     });
     var data = await res.json();
-    var reply = data.content?.[0]?.text || "Sorry, I could not get a response. Please try again.";
+    var reply = data.reply || data.content?.[0]?.text || "Sorry, I could not get a response. Please try again.";
     typing.remove();
     tcAddMsg(reply, 'bot');
     tcMsgs.push({role:'assistant', content:reply});
