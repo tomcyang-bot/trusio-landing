@@ -787,9 +787,8 @@ footer{background:#060e1a;padding:48px 56px;}
           <li>Priority turnaround</li>
           <li>Custom credit policy</li>
         </ul>
-        <button class="price-btn-dark" onclick="window.location.href='mailto:hello@trusio.com.au'">Contact us</button>
+        <button class="price-btn-dark" onclick="event.preventDefault();if(!tcOpen){tcOpen=false;tcToggle();}tcSetTab('contact');">Contact us</button>
       </div>
-
     </div>
   </div>
 </div>
@@ -924,7 +923,7 @@ footer{background:#060e1a;padding:48px 56px;}
     <div class="footer-links">
       <a href="/privacy.html">Privacy</a>
       <a href="/terms.html">Terms</a>
-      <a href="/cdn-cgi/l/email-protection#fd9e959893bd9b8889888f98929398d39c88">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#0f6c676a614f697a7b7a7d6a60616a216e7a">Contact</a>
       <a href="https://app.trusio.com.au">Login →</a>
     </div>
   </div>
@@ -988,14 +987,28 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     </div>
     <button onclick="tcToggle()" style="background:none;border:none;color:rgba(255,255,255,.5);cursor:pointer;font-size:20px;padding:0;">✕</button>
   </div>
-  <div id="tc-msgs">
-    <div class="tc-msg bot">Hi! I'm the Trusio assistant. Ask me anything about how Trusio works, pricing, or how to get started. 👋</div>
+  <div id="tc-tabs" style="display:flex;border-bottom:1px solid #f1f5f9;">
+    <button id="tc-tab-ai" onclick="tcSetTab('ai')" style="flex:1;padding:10px;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit;background:#fff;color:#1d4ed8;border-bottom:2px solid #1d4ed8;">💬 Ask AI</button>
+    <button id="tc-tab-contact" onclick="tcSetTab('contact')" style="flex:1;padding:10px;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit;background:#fff;color:#94a3b8;border-bottom:2px solid transparent;">📋 Contact Us</button>
   </div>
-  <div id="tc-input-row">
-    <textarea id="tc-input" rows="1" placeholder="Ask a question..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();tcSend();}"></textarea>
-    <button id="tc-send" onclick="tcSend()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-    </button>
+  <div id="tc-panel-ai">
+    <div id="tc-msgs">
+      <div class="tc-msg bot">Hi! I'm the Trusio assistant. Ask me anything about how Trusio works, pricing, or how to get started. 👋</div>
+    </div>
+    <div id="tc-input-row">
+      <textarea id="tc-input" rows="1" placeholder="Ask a question..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();tcSend();}"></textarea>
+      <button id="tc-send" onclick="tcSend()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="tc-panel-contact" style="display:none;padding:16px;overflow-y:auto;">
+    <p style="font-size:13px;color:#64748b;margin-bottom:14px;">Send us a message and we'll get back to you within 1 business day.</p>
+    <input id="tc-cf-name" type="text" placeholder="Your name" style="width:100%;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box;"/>
+    <input id="tc-cf-email" type="email" placeholder="Your email" style="width:100%;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;box-sizing:border-box;"/>
+    <textarea id="tc-cf-msg" rows="4" placeholder="Your message..." style="width:100%;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;margin-bottom:10px;outline:none;resize:none;box-sizing:border-box;"></textarea>
+    <button onclick="tcSubmitContact()" style="width:100%;background:#0a1628;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Send Message</button>
+    <div id="tc-cf-status" style="margin-top:10px;font-size:13px;text-align:center;"></div>
   </div>
 </div>
 
@@ -1003,8 +1016,43 @@ document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 var tcOpen = false;
 var tcMsgs = [];
 var tcLoading = false;
-var tcSystem = "You are a helpful assistant for Trusio, a credit and cashflow control platform for Australian B2B suppliers. Trusio helps suppliers verify customers (ABN/ASIC), assess credit risk, collect digital Personal Guarantees with witnesses and ID upload, generate Evidence Packs, and manage the full credit onboarding process. Pricing: Free to sign up. $69 per credit report, no subscription required. Website: trusio.com.au. App: app.trusio.com.au. IMPORTANT: Detect the language of the user's message and always respond in the same language. If they write in Chinese, respond in Chinese. If they write in English, respond in English.";
+var tcSystem = "You are a helpful assistant for Trusio, a credit and cashflow control platform for Australian B2B suppliers. Trusio helps suppliers verify customers (ABN/ASIC), assess credit risk, collect digital Personal Guarantees with witnesses and ID upload, generate Evidence Packs, and manage the full credit onboarding process. Pricing: Starter $49/mo, Pro $99/mo (includes 1 managed credit report), Business $199/mo (includes 3 managed credit reportsd in the same language. If they write in Chinese, respond in Chinese. If they write in English, respond in English.";
 
+var tcCurrentTab = 'ai';
+function tcSetTab(tab){
+  tcCurrentTab = tab;
+  document.getElementById('tc-panel-ai').style.display = tab==='ai' ? 'flex' : 'none';
+  document.getElementById('tc-panel-ai').style.flexDirection = 'column';
+  document.getElementById('tc-panel-contact').style.display = tab==='contact' ? 'block' : 'none';
+  document.getElementById('tc-tab-ai').style.color = tab==='ai' ? '#1d4ed8' : '#94a3b8';
+  document.getElementById('tc-tab-ai').style.borderBottom = tab==='ai' ? '2px solid #1d4ed8' : '2px solid transparent';
+  document.getElementById('tc-tab-contact').style.color = tab==='contact' ? '#1d4ed8' : '#94a3b8';
+  document.getElementById('tc-tab-contact').style.borderBottom = tab==='contact' ? '2px solid #1d4ed8' : '2px solid transparent';
+}
+async function tcSubmitContact(){
+  var name = document.getElementById('tc-cf-name').value.trim();
+  var email = document.getElementById('tc-cf-email').value.trim();
+  var msg = document.getElementById('tc-cf-msg').value.trim();
+  var status = document.getElementById('tc-cf-status');
+  if(!name||!email||!msg){ status.style.color='#dc2626'; status.textContent='Please fill in all fields.'; return; }
+  status.style.color='#64748b'; status.textContent='Sending...';
+  try {
+    var res = await fetch('https://vcdgcojqbhntjxymjvyc.supabase.co/functions/v1/send-email', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        to:'chen@futureone.au',
+        subject:'Trusio Contact Form — ' + name,
+        html:'<div style="font-family:sans-serif;padding:24px;"><h3>New Contact Form Submission</h3><p><strong>Name:</strong> '+name+'</p><p><strong>Email:</strong> '+email+'</p><p><strong>Message:</strong></p><p>'+msg+'</p></div>'
+      })
+    });
+    status.style.color='#16a34a'; status.textContent='Message sent! We'll be in touch soon.';
+    document.getElementById('tc-cf-name').value='';
+    document.getElementById('tc-cf-email').value='';
+    document.getElementById('tc-cf-msg').value='';
+  } catch(e) {
+    status.style.color='#dc2626'; status.textContent='Error sending. Please email hello@trusio.com.au';
+  }
+}
 function tcToggle(){
   tcOpen=!tcOpen;
   document.getElementById('tc-box').style.display=tcOpen?'flex':'none';
@@ -1051,4 +1099,11 @@ async function tcSend(){
   document.getElementById('tc-send').disabled = false;
 }
 
-document.getElementById('tc-input').addEv
+document.getElementById('tc-input').addEventListener('input', function(){
+  this.style.height='auto';
+  this.style.height=Math.min(this.scrollHeight,96)+'px';
+});
+</script>
+
+</body>
+</html>
