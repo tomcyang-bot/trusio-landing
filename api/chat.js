@@ -1,7 +1,12 @@
 module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).end();
+
   const { messages, system, contactForm } = req.body;
- 
+
   // Handle contact form submission
   if (contactForm) {
     const { name, company, phone, email, service, message } = contactForm;
@@ -26,7 +31,7 @@ module.exports = async function handler(req, res) {
     } catch(e) { console.error('Email error:', e); }
     return res.status(200).json({ reply: 'received' });
   }
- 
+
   // Handle AI chat
   try {
     const filtered = messages.filter((m, i) => !(i === 0 && m.role === 'assistant'));
@@ -51,4 +56,3 @@ module.exports = async function handler(req, res) {
     res.status(500).json({ error: e.message });
   }
 };
- 
