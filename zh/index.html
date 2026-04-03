@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="Trusio — 澳洲建筑行业信用与追款平台。查信用、签担保、追欠款，$69起，保护你的每一笔生意。">
+<title>Trusio — 你做生意，我帮你收钱</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --navy: #0A1628;
+    --green: #22C55E;
+    --green-dark: #15803d;
+    --white: #ffffff;
+    --off: #f7f6f2;
+    --gray: #6b7280;
+    --light-gray: #f1f5f9;
+    --border: #e5e3de;
+    --red: #dc2626;
+    --amber: #d97706;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans SC', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--black);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,22,40,.96);
+    backdrop-filter: blur(8px);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .nav-logo {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+  .nav-logo span { color: var(--green); }
+  .nav-cta {
+    background: var(--green);
+    color: var(--black);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 56px 24px 52px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--green);
+  }
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid rgba(34,197,94,.35);
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .14em;
+    padding: 5px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--green);
+  }
+  .hero-desc {
+    font-size: 16px;
+    color: rgba(255,255,255,.55);
+    font-weight: 300;
+    max-width: 340px;
+    margin: 0 auto 32px;
+    line-height: 1.75;
+  }
+  .hero-btn {
+    display: inline-block;
+    background: var(--green);
+    color: var(--black);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    letter-spacing: .02em;
+    margin-bottom: 14px;
+  }
+  .hero-note {
+    font-size: 12px;
+    color: rgba(255,255,255,.3);
+  }
+  .hero-tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 32px;
+  }
+  .hero-tag {
+    font-size: 12px;
+    color: rgba(255,255,255,.45);
+    border: 1px solid rgba(255,255,255,.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  /* ── SECTION COMMON ── */
+  .section { padding: 52px 24px; }
+  .section-alt { background: var(--off); }
+  .section-dark { background: var(--navy); }
+  .label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+  .label-light { color: rgba(255,255,255,.3); }
+  .section-title {
+    font-size: 26px;
+    font-weight: 900;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .section-title-light { color: var(--white); }
+  .section-sub {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+  .section-sub-light { color: rgba(255,255,255,.45); }
+
+  /* ── PAIN ── */
+  .pain-list { display: flex; flex-direction: column; gap: 14px; }
+  .pain-card {
+    border-left: 3px solid var(--red);
+    background: #fef9f9;
+    padding: 16px 18px;
+    border-radius: 0 8px 8px 0;
+  }
+  .pain-card p { font-size: 14px; color: #374151; line-height: 1.75; }
+  .pain-card strong { color: var(--black); font-weight: 700; display: block; margin-bottom: 4px; }
+
+  /* ── HOW ── */
+  .steps { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .step {
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: var(--white);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    width: 32px; height: 32px;
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-content h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .step-content p { font-size: 13px; color: var(--gray); line-height: 1.65; }
+  .step-tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: .04em;
+  }
+  .tag-auto { background: #f0fdf4; color: var(--green-dark); }
+  .tag-lawyer { background: #fef3c7; color: var(--amber); }
+
+  /* ── TOOLS ── */
+  .tools-list { display: flex; flex-direction: column; gap: 12px; }
+  .tool {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .tool-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .tool-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .tool-body p { font-size: 13px; color: var(--gray); line-height: 1.65; }
+  .t1 { border-left: 3px solid #94a3b8; }
+  .t1 .tool-icon { background: #f1f5f9; }
+  .t2 { border-left: 3px solid #0d9488; }
+  .t2 .tool-icon { background: #f0fdfa; }
+  .t3 { border-left: 3px solid #d97706; }
+  .t3 .tool-icon { background: #fffbeb; }
+  .t4 { border-left: 3px solid #e05a3a; }
+  .t4 .tool-icon { background: #fff5f2; }
+
+  /* ── PROOF ── */
+  .proof-grid { display: flex; flex-direction: column; gap: 16px; }
+  .proof-card {
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .proof-num {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .proof-label {
+    font-size: 13px;
+    color: rgba(255,255,255,.5);
+    line-height: 1.6;
+  }
+
+  /* ── WHO ── */
+  .who-list { display: flex; flex-direction: column; gap: 12px; }
+  .who-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .who-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 10px; color: var(--navy); }
+  .who-card ul { list-style: none; font-size: 13px; color: var(--gray); line-height: 1.9; }
+  .who-card ul li::before { content: '→ '; color: var(--green-dark); font-weight: 700; }
+
+  /* ── PRICING ── */
+  .price-card {
+    background: var(--white);
+    border: 2px solid var(--green);
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  .price-main {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-unit { font-size: 16px; color: var(--gray); margin-bottom: 20px; }
+  .price-includes {
+    list-style: none;
+    text-align: left;
+    font-size: 14px;
+    color: #374151;
+    line-height: 2;
+    margin-bottom: 24px;
+  }
+  .price-includes li::before { content: '✓  '; color: var(--green-dark); font-weight: 700; }
+  .price-btn {
+    display: block;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+  }
+  .price-note { font-size: 12px; color: var(--gray); margin-top: 12px; text-align: center; }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: var(--green);
+    padding: 52px 24px;
+    text-align: center;
+  }
+  .final-cta h2 {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  .final-cta p { font-size: 14px; color: rgba(0,0,0,.5); margin-bottom: 28px; }
+  .final-btn {
+    display: inline-block;
+    background: var(--black);
+    color: var(--white);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    padding: 24px;
+    text-align: center;
+  }
+  .foot-logo { font-size: 18px; font-weight: 900; color: var(--white); letter-spacing: 1px; margin-bottom: 6px; }
+  .foot-logo span { color: var(--green); }
+  .foot-note { font-size: 11px; color: rgba(255,255,255,.2); line-height: 1.7; }
+
+  /* ── DESKTOP ── */
+  @media (min-width: 640px) {
+    .hero { padding: 80px 40px 72px; }
+    .hero h1 { font-size: 52px; }
+    .section { padding: 72px 40px; }
+    .pain-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .proof-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .who-list { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .tools-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .tool { flex-direction: column; }
+    .price-card { max-width: 400px; margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">TRUSIO<span>.</span></div>
+  <a href="https://app.trusio.com.au" class="nav-cta">立即开始 →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">澳洲建筑行业 · 信用与追款平台</div>
+  <h1>你做生意<br><em>我帮你收钱</em></h1>
+  <p class="hero-desc">客户不付钱？货发出去追不回？Trusio 把法律工具变成你手里的武器。</p>
+  <a href="https://app.trusio.com.au" class="hero-btn">开始保护我的生意 →</a>
+  <div class="hero-note">$69 / 份 · 无月费 · 随时开始</div>
+  <div class="hero-tags">
+    <span class="hero-tag">供货商 Supplier</span>
+    <span class="hero-tag">分包商 Subcontractor</span>
+    <span class="hero-tag">总包 Builder</span>
+  </div>
+</div>
+
+<!-- PAIN -->
+<div class="section section-alt">
+  <div class="label">你是不是遇到过这些</div>
+  <h2 class="section-title">做完了，钱没来</h2>
+  <p class="section-sub">澳洲建筑行业拖欠款问题严重，每年有数以亿计的货款和工程款追不回来。</p>
+  <div class="pain-list">
+    <div class="pain-card">
+      <p><strong>货发出去了，钱没收到</strong>客户说下周付，然后失联。追了三个月，最后一分没要回来。</p>
+    </div>
+    <div class="pain-card">
+      <p><strong>工程做完了，总包不认账</strong>没有合同，没有担保，没有任何追款依据。打官司还不如直接亏掉。</p>
+    </div>
+    <div class="pain-card">
+      <p><strong>客户突然 Winding Up</strong>你的货还在他仓库，银行先来拿走，你排在最后，什么都剩不下。</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW -->
+<div class="section">
+  <div class="label">Trusio 怎么保护你</div>
+  <h2 class="section-title">四步，把风险挡在门外</h2>
+  <p class="section-sub">从放账前到追款后，每个节点都有对应的工具。</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h4>查信用 — 先看清楚再放账</h4>
+        <p>新客户信用评分 0–850，AI 自动分析付款历史、法庭记录、破产风险。高风险的直接拒掉。</p>
+        <span class="step-tag tag-auto">Trusio 自动完成</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h4>签担保 — 让董事个人负责</h4>
+        <p>客户董事在线签 Personal Guarantee Deed。公司倒了，董事个人还是要还钱，不能躲。</p>
+        <span class="step-tag tag-auto">Trusio 自动完成</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h4>锁货权 — 破产也能拿回货</h4>
+        <p>PPSR 登记保住未安装货物的所有权。客户破产，你优先于银行拿回货物或等额价款。</p>
+        <span class="step-tag tag-auto">Trusio 代办登记</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h4>追欠款 — 法律逼他还钱</h4>
+        <p>SOPA 发票声明 10 日强制回应，不回就仲裁。长期欠款可通过 PG 锁定董事房产，无法卖房再贷。</p>
+        <span class="step-tag tag-lawyer">部分环节须律师介入</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLS -->
+<div class="section section-alt">
+  <div class="label">四件武器</div>
+  <h2 class="section-title">覆盖建筑付款链<br>每一个节点</h2>
+  <p class="section-sub" style="margin-bottom:24px;">供货商、分包商、总包 Builder 全部适用。</p>
+  <div class="tools-list">
+    <div class="tool t1">
+      <div class="tool-icon">📊</div>
+      <div class="tool-body">
+        <h4>Credit Report 信用报告</h4>
+        <p>放账前 3 分钟看穿对方。评分、付款历史、法庭记录、破产风险全部呈现。10 页完整报告。</p>
+      </div>
+    </div>
+    <div class="tool t2">
+      <div class="tool-icon">🔒</div>
+      <div class="tool-body">
+        <h4>PPSR 货权登记</h4>
+        <p>货到未装时保住所有权。客户破产，你是第一顺位，银行也拿不走你的货。Trusio 自动代办。</p>
+      </div>
+    </div>
+    <div class="tool t3">
+      <div class="tool-icon">⚡</div>
+      <div class="tool-body">
+        <h4>SOPA 付款保障</h4>
+        <p>发票底部一行声明，10 天不回应直接进仲裁。无需上法庭，建筑安装服务专用。</p>
+      </div>
+    </div>
+    <div class="tool t4">
+      <div class="tool-icon">🏠</div>
+      <div class="tool-body">
+        <h4>Caveat 房产锁定</h4>
+        <p>通过 PG Deed 登记在董事名下房产。不还钱就无法卖房再贷。大额欠款终极手段。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROOF -->
+<div class="section section-dark">
+  <div class="label label-light">为什么值得</div>
+  <h2 class="section-title section-title-light" style="margin-bottom:8px;">数字说话</h2>
+  <p class="section-sub section-sub-light" style="margin-bottom:32px;">Trusio 把原本需要律师、会计师、信用局三方协作的事，整合进一个平台。</p>
+  <div class="proof-grid">
+    <div class="proof-card">
+      <div class="proof-num">$69</div>
+      <div class="proof-label">一份完整信用报告<br>无月费，随用随付</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-num">10天</div>
+      <div class="proof-label">SOPA 强制回应期<br>不回应即视为认账</div>
+    </div>
+    <div class="proof-card">
+      <div class="proof-num">$500+</div>
+      <div class="proof-label">T&C 模板免费下载<br>请律师起草的市场价</div>
+    </div>
+  </div>
+</div>
+
+<!-- WHO -->
+<div class="section">
+  <div class="label">谁在用 Trusio</div>
+  <h2 class="section-title">建筑付款链<br>每一层都能用</h2>
+  <p class="section-sub">不管你是卖货的、做工程的还是总包，欠款问题都一样，工具也一样好用。</p>
+  <div class="who-list">
+    <div class="who-card">
+      <h4>🏗 供货商 Supplier</h4>
+      <ul>
+        <li>放账前查信用</li>
+        <li>PPSR 保住货权</li>
+        <li>PG 签署存档</li>
+        <li>SOPA 快速追货款</li>
+      </ul>
+    </div>
+    <div class="who-card">
+      <h4>🔧 分包商 Subcontractor</h4>
+      <ul>
+        <li>工程款被总包拖欠</li>
+        <li>SOPA 仲裁追款</li>
+        <li>Caveat 锁定总包房产</li>
+        <li>完整证据链存档</li>
+      </ul>
+    </div>
+    <div class="who-card">
+      <h4>🏢 总包 Builder</h4>
+      <ul>
+        <li>评估下游分包信用</li>
+        <li>SOPA 逼业主付尾款</li>
+        <li>PG Deed 个人追责</li>
+        <li>全流程风险管理</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="section section-alt">
+  <div class="label">定价</div>
+  <h2 class="section-title" style="margin-bottom:8px;">简单透明<br>没有隐藏费用</h2>
+  <p class="section-sub">按次收费，用多少付多少。不需要月费，不需要年费。</p>
+  <div class="price-card">
+    <div class="price-main">$69</div>
+    <div class="price-unit">/ 份信用报告</div>
+    <ul class="price-includes">
+      <li>CreditorWatch 完整信用数据</li>
+      <li>AI 风险分析与建议</li>
+      <li>10 页品牌报告 PDF</li>
+      <li>PG Deed 在线签署</li>
+      <li>T&C 模板免费下载</li>
+      <li>PPSR 提醒与引导</li>
+    </ul>
+    <a href="https://app.trusio.com.au" class="price-btn">开始使用 Trusio →</a>
+    <p class="price-note">无需订阅 · 随时开始 · 数据安全存储</p>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <h2>下一个不付钱的客户<br>让 Trusio 出面</h2>
+  <p>$69 出一份报告，可能帮你省下几万块的坏账</p>
+  <a href="https://app.trusio.com.au" class="final-btn">立即开始 →</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">TRUSIO<span>.</span></div>
+  <div class="foot-note">
+    trusio.com.au · 澳洲建筑行业信用与追款平台<br>
+    仅为技术平台，不提供法律或财务建议。法律条款使用前请咨询律师。
+  </div>
+</footer>
+
+</body>
+</html>
